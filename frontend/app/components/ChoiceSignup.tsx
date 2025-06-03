@@ -2,16 +2,23 @@
 
 import { Dialog, Transition } from "@headlessui/react";
 import Image from "next/image";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 
 const ChoiceSignup = ({ isOpen, onClose, onContinue }: { isOpen: boolean; onClose: () => void;onContinue: (role:string) => void }) => {
   const [selectedRole, setSelectedRole] = useState('');
  
    const handleContinue = () => {
-    onClose();
-    onContinue(selectedRole); // Appelle la fonction du parent
+    onContinue(selectedRole);
+    console.log('Selected Role:', selectedRole); // Affiche le rôle sélectionné dans la console
+     // Appelle la fonction du parent
   };
+  useEffect(() => {
+    if (!isOpen) {
+      setSelectedRole(''); // Réinitialise le rôle sélectionné lorsque la modale se ferme
+    }
+  }
+, [isOpen]);
 
   return (
     <Transition appear show={isOpen} as={Fragment}>

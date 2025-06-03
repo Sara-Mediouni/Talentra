@@ -31,7 +31,7 @@ export default function CompleteProfileModal({ isOpen, onClose, onPrevious,role 
    });
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    axios.post('http://localhost:3000/cv/upload', file, {
+    axios.post('http://localhost:3000/api/cv/upload', file, {
       headers: {
         'Content-Type': file?.type || 'application/pdf',
       },
@@ -52,7 +52,7 @@ export default function CompleteProfileModal({ isOpen, onClose, onPrevious,role 
     const id= localStorage.getItem("id");
     // Logic to update the profile based on the role
     if (role === "individual") {
-      axios.post(`http://localhost:3000/users/update/${id}`, {})
+      axios.post(`http://localhost:3000/api/users/update/${id}`, {})
         .then(response => {
           console.log('Profile updated successfully:', response.data);
           // Handle success response
@@ -63,7 +63,7 @@ export default function CompleteProfileModal({ isOpen, onClose, onPrevious,role 
         });
      
     } else if (role === "company") {
-        axios.post(`http://localhost:3000/company/update/${id}`, {})
+        axios.post(`http://localhost:3000/api/company/update/${id}`, {})
         .then(response => {
           console.log('Profile updated successfully:', response.data);
           // Handle success response
@@ -104,6 +104,13 @@ export default function CompleteProfileModal({ isOpen, onClose, onPrevious,role 
           leaveTo="opacity-0 scale-95"
         >
           <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white p-6 text-left shadow-xl transition-all">
+              <button
+                  onClick={onClose}
+                  className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-xl"
+                  aria-label="Close"
+                >
+                  ×
+                </button>
             <Dialog.Title className="text-lg font-bold text-gray-900">
               Complete Your Profile
             </Dialog.Title>
@@ -148,6 +155,7 @@ export default function CompleteProfileModal({ isOpen, onClose, onPrevious,role 
                       onChange={handleFileChange}
                       className="form-input w-full"
                     />
+                    </div>
                   <div className="flex flex-col">
                     <label className="text-sm font-medium text-gray-900 mb-1">Profile Picture</label>
                     <input
@@ -213,7 +221,7 @@ export default function CompleteProfileModal({ isOpen, onClose, onPrevious,role 
                 </>
               )}
             </div>
-
+            
             {/* Footer buttons */}
             <div className="mt-6 flex justify-between">
               <button type="submit"

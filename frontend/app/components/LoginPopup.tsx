@@ -29,7 +29,7 @@ interface LoginPopupProps {
   onClose: () => void;
   type: AuthType;
   role:string,
-  toggleType: () => void;
+  toggleType: (newType: AuthType) => void;
   onPrevious?: () => void;
   onContinue?: () => void; // Optional prop for previous action
 }
@@ -60,31 +60,27 @@ const LoginPopup: React.FC<LoginPopupProps> = ({
   const router = useRouter();
   const dispatch = useAppDispatch();
   const countries = useAppSelector((state) => state.country.countries);
-  const [showModal, setShowModal] = useState(false);
+ 
   const handleContinue = () => {
-    onClose();
+    
     onContinue(); // Appelle la fonction du parent
   };
-  const handleSignup = async () => {
-    setShowModal(true);
-  };
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const LoginUser = () => {
     axios
-      .post(`http://localhost:3000/users/${url}`, form)
+      .post(`http://localhost:3000/api/users/${url}`, form)
       .then((response) => {
         if (response.data.success) {
           localStorage.setItem("id", response.data.user._id);
           dispatch(setToken(response.data.token));
           dispatch(setUser(jwtDecode(response.data.token).id));
-          if (type === "Signup") {
-            handleSignup();
-          }
-          onClose();
-          router.push("/");
+          handleContinue();
+          
+          
           console.log(response?.data.message);
         } else setError(response?.data.message || "An Error has Occured.");
       })
@@ -97,7 +93,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({
   };
   const LoginCompany = () => {
     axios
-      .post(`http://localhost:3000/company/${url}`, form)
+      .post(`http://localhost:3000/api/company/${url}`, form)
       .then((response) => {
         if (response.data.success) {
           localStorage.setItem("id", response.data.company._id);
@@ -120,8 +116,11 @@ const LoginPopup: React.FC<LoginPopupProps> = ({
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(role);
     if (role === "individual") 
-       {LoginUser()} 
+       {LoginUser();
+        console.log("LoginUser called");
+       } 
     else {LoginCompany()}
     
   };
@@ -310,7 +309,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({
 )}
  <button
                 type="submit"
-                onClick={() => handleContinue()}
+                
                 className="bg-orange-300 text-white py-3 rounded-lg font-semibold hover:bg-violet/90 transition"
               >
                 {type === "Login" ? "Log In" : "Sign Up"}

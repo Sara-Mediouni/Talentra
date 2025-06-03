@@ -2,18 +2,20 @@ import React, { useState } from 'react'
 import LoginPopup from './LoginPopup'
 import ChoiceSignup from './ChoiceSignup'
 import CompleteProfileModal from './CompleteProfileModal';
+import { log } from 'console';
 
 const SignupComponent = ({ onClose }: { onClose: () => void }) => {
 const [showSignupChoice, setShowSignupChoice] = useState(true);
 const [showModal, setShowModal] = useState(false);
+const [showLoginPopup, setShowLoginPopup] = useState(false);
+
 const [role, setRole] = useState('');
   const [Type, setType] = useState('Signup');
   const togglePopupType = (newType: 'Login' | 'Signup') => {
     setType(newType); // Change le type de popup (Login ou Signup)
   };
   const handleSignupContinue = (selectedRole: string) => {
-     setRole(selectedRole); // 👈 tu récupères le rôle ici
-    // tu peux maintenant rediriger, afficher un autre modal, etc.
+  setRole(selectedRole); 
   setShowSignupChoice(false);
   setShowLoginPopup(true);
   
@@ -31,6 +33,7 @@ const resetSignupFlow = () => {
   setShowLoginPopup(false);
 }
  const handleCompletePrevious = () => {
+
   setShowModal(false);
   setShowLoginPopup(true);
 }
@@ -39,24 +42,26 @@ const handleSignup = () => {
   setShowLoginPopup(false);
    // Ouvre la modale de complétion du profil
 }
-const [showLoginPopup, setShowLoginPopup] = useState(false);
   return (
     <>
       <ChoiceSignup
       isOpen={showSignupChoice}
       onContinue={handleSignupContinue}
       onClose={resetSignupFlow}/>
-      <LoginPopup
-            onPrevious={handleSignupPrevious}
-            isOpen={showLoginPopup}
-            onClose={resetSignupFlow}
-            type={Type}
-            toggleType={togglePopupType}
-            onContinue={handleSignup}
-            role={role}
-          />
-      <CompleteProfileModal isOpen={showModal} role={role}
-      onClose={resetSignupFlow} onPrevious={handleCompletePrevious}/>
+      {showLoginPopup && (
+     <LoginPopup
+      isOpen={showLoginPopup}
+      onClose={resetSignupFlow}
+      onPrevious={handleSignupPrevious}
+      toggleType={togglePopupType}
+      type={Type}
+      role={role}
+      onContinue={handleSignup}/>)}
+      <CompleteProfileModal 
+      isOpen={showModal}
+      role={role}
+      onClose={resetSignupFlow}
+      onPrevious={handleCompletePrevious}/>
       
      
     </>

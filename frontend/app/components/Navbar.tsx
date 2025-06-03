@@ -79,7 +79,8 @@ export default function Navbar() {
       )}
       {showLogin && 
       <SignupComponent
-      onClose={() => setShowLogin(false)}
+        onClose={() => setShowLogin(false)}
+       
     />}
     </header>
   )
