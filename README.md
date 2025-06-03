@@ -1,7 +1,7 @@
 # 🚀 Talentra – Modernizing the Job Search Experience
 
 <p align="center">
-  <img src="./frontend/public/Capture d’écran 2025-06-03 133810.png" alt="Talentra Hero" width="800"/>
+  <img src="./frontend/public/Capture d’écran 2025-06-03 133810.png" alt="Talentra Hero" width="600"/>
 </p>
 
 <p align="center">
