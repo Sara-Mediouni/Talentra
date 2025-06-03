@@ -1,72 +1,100 @@
-# 🚀 TALENTRA — Job Matching Platform (NestJS + Next.js)
+# 🚀 Talentra – Modernizing the Job Search Experience
 
-![NestJS](https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=nestjs&logoColor=white)
-![NextJS](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
-![TailwindCSS](https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
-![Redis](https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white)
+<p align="center">
+  <img src="./frontend/public/Capture d’écran 2025-06-03 133810.png" alt="Talentra Hero" width="800"/>
+</p>
 
+<p align="center">
+  <b>Empowering individuals and companies to connect faster, smarter.</b><br/>
+  Fullstack platform using NestJS microservices, Next.js frontend, TailwindCSS UI and Redis communication.
+</p>
 
-🎯 **TALENTRA** is a modern job platform built with a microservice architecture using **NestJS** for the backend and **Next.js** for the frontend. It connects **candidates** and **recruiters**, making the hiring process fast, personalized, and intuitive.
+<p align="center">
+  <img src="https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=nestjs&logoColor=white" />
+  <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" />
+  <img src="https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" />
+  <img src="https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white" />
+</p>
 
 ---
 
-## 📸 Preview
+## 📚 Table of Contents
 
-![talentra-preview](./public/preview.png) <!-- Ajoute une image si tu en as une -->
+- [🔍 Preview](#-preview)
+- [⚙️ Tech Stack](#️-tech-stack)
+- [✨ Features](#-features)
+- [🚀 Getting Started](#-getting-started)
+- [📁 Project Structure](#-project-structure)
+- [🛣️ Roadmap](#-roadmap)
+- [📄 License](#-license)
 
 ---
 
-## 🛠️ Tech Stack
+## 🔍 Preview
 
-### Frontend
-- ⚡️ [Next.js](https://nextjs.org/) — React Framework
-- 🎨 Tailwind CSS — Utility-first CSS
-- 🌐 TypeScript
+<p align="center">
+  <img src="./public/hero-talentra.png" alt="Hero Preview" width="70%"/>
+</p>
+
+---
+
+## ⚙️ Tech Stack
+
+- 🔧 **NestJS** – Backend microservices
+- 🎨 **Next.js** – Frontend rendering
+- 💅 **TailwindCSS** – UI styling
+- 🧠 **Redis** – Microservice communication
+- 🗂 **MongoDB** – Database (User, Jobs, Applications)
+
+---
+
+## ✨ Features
+
+### 👤 For Job Seekers:
+- Register / Login
+- Profile creation with skills and CV
+- Job search by category and keyword
+- Apply to jobs and track status
+
+### 🏢 For Employers:
+- Company registration & dashboard
+- Job posting & management
+- Browse and filter candidates
+
+### 🔁 Shared:
+- JWT Auth & Role-based access
+- Modular NestJS microservices
+- Smart filtering and UX with TailwindCSS
+
+---
+
+## 🚀 Getting Started
 
 ### Backend
-- 🔧 [NestJS](https://nestjs.com/) — Node.js Framework
-- 🧩 Microservices (with Redis transport)
-- 📦 MongoDB (via Mongoose)
-- ⚙️ Redis (for microservices transport + caching)
-- 🔐 JWT Authentication
+```bash
+cd backend
+npm install
+npm run start:dev
+```
 
----
-
-## 🔍 Features
-
-### 👤 For Candidates
-- Register / Login with secure JWT
-- Complete personal & professional profile
-- Browse & search job offers by filters
-- Apply to job offers
-- Track application status
-
-### 🏢 For Companies
-- Register / Login
-- Create & manage job offers
-- Filter and view candidates
-- Manage applications
-
----
-
-## 🧪 Tests
-
-- Unit tests with **Jest** & **React Testing Library**
-- Coverage badges and CI/CD (GitHub Actions)
-
----
-
+### Frontend
+```bash
+cd frontend
+npm install
+npm run dev
+```
+Ensure Redis and MongoDB are running locally or in Docker.
 ## 📁 Project Structure
+
+
 ```bash
 talentra/
-├── gateway/ # NestJS API Gateway
-├── user-service/ # Microservice - Users (candidates & companies)
-├── job-service/ # Microservice - Job offers
-├── frontend/ # Next.js frontend
-├── shared/ # Shared DTOs / types
-└── docker/ # Docker & docker-compose setup
+│
+├── gateway/                # NestJS API Gateway
+├── user-service/           # Microservice - Users
+├── job-service/            # Microservice - Job Offers
+├── application-service/    # Microservice - Applications
+├── frontend/               # Next.js client app
+└── shared/                 # Shared interfaces and DTOs
 
-yaml
-Copy
-Edit
 ```
